@@ -7,8 +7,10 @@ import Vuetify from 'vuetify'
 import store from './store'
 import 'vuetify/dist/vuetify.min.css'
 import 'vuetify/src/stylus/main.styl'
+import Api from './api'
 
-Vue.use(Vuetify)
+Vue.use(Vuetify);
+Vue.use(Api);
 
 Vue.config.productionTip = false
 

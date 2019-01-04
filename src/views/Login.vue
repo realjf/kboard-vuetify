@@ -15,12 +15,12 @@
                 <v-card-text>
                   <v-form>
                     <v-text-field prepend-icon="person" name="email" label="邮箱" type="text"></v-text-field>
-                    <v-text-field prepend-icon="lock" name="password" label="密码" id="password" type="password"></v-text-field>
+                    <v-text-field prepend-icon="lock" name="password" label="密码" id="password" type="password" value=""></v-text-field>
                   </v-form>
                 </v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="primary">登录</v-btn>
+                  <v-btn color="primary" @click="login()">登录</v-btn>
                 </v-card-actions>
               </v-card>
             </v-flex>
@@ -41,6 +41,18 @@
         }),
         props: {
             source: String
+        },
+        methods: {
+            login: function () {
+              this.$api.api_login.login({
+                'email': this.email,
+                "password": this.password,
+              }).then(resp => {
+                  console.log(resp);
+              }).catch(res => {
+                console.log(res);
+              })
+            }
         }
     }
 </script>
