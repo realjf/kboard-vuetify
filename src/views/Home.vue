@@ -73,7 +73,7 @@
         :clipped-left="$vuetify.breakpoint.mdAndUp"
         fixed
       >
-        <v-toolbar-title style="width: 200px" class="ml-0 pl-3">
+        <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
           <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
           <span class="hidden-sm-and-down">PaaS容器管理平台</span>
         </v-toolbar-title>
@@ -233,6 +233,30 @@
                 children: [
                   { text: '配置项' },
                   { text: '保密字典' },
+                ]
+              },
+              {
+                icon: 'keyboard_arrow_up',
+                'icon-alt': 'keyboard_arrow_down',
+                text: '存储',
+                model: false,
+                children: [
+                  { text: '镜像' },
+                  { text: '编排模板' },
+                  { text: '应用目录' },
+                  { text: '服务目录' },
+                ]
+              },
+              {
+                icon: 'keyboard_arrow_up',
+                'icon-alt': 'keyboard_arrow_down',
+                text: '集群',
+                model: false,
+                children: [
+                  { text: '镜像' },
+                  { text: '编排模板' },
+                  { text: '应用目录' },
+                  { text: '服务目录' },
                 ]
               },
               {
