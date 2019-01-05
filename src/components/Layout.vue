@@ -1,5 +1,4 @@
 <template>
-  <div id="app">
     <v-app id="inspire">
       <v-navigation-drawer
         fixed
@@ -94,7 +93,7 @@
       <v-content>
         <v-container fluid fill-height>
           <v-layout justify-center align-center>
-
+            <slot name="content"></slot>
           </v-layout>
         </v-container>
       </v-content>
@@ -173,7 +172,6 @@
         </v-card>
       </v-dialog>
     </v-app>
-  </div>
 </template>
 
 <script>

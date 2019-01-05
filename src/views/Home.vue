@@ -1,12 +1,15 @@
 <template>
-  <Layout></Layout>
+  <Layout>
+    <EditTable slot="content"></EditTable>
+  </Layout>
 </template>
 
 <script>
     import Layout from "../components/Layout";
+    import EditTable from "../components/table/EditTable";
     export default {
         name: "Home",
-        components: {Layout},
+        components: {EditTable, Layout},
       data () {
         return {}
       }
