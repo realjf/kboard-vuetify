@@ -36,7 +36,7 @@
 </template>
 
 <script>
-    import Alert from "../components/common/Alert";
+
     export default {
         name: "Login",
         data: () => ({
@@ -81,16 +81,15 @@
               }).then(resp => {
                   if(resp.code == 100){
                     let payload = {username: resp.result.username, email: resp.result.email};
-                    console.log(this.$store);
                     this.$store.commit('user/UPDATE_USER_INFO', payload);
-                    this.$router.push("/home")
+                    // 设置cookie
+                    window.location.href = "/home";
                   }else{
-                    Alert.methods.errorAlert(resp.message);
+
                   }
               }).catch(error => {
                 let err = JSON.stringify(error);
                 console.log(err);
-                Alert.methods.errorAlert(err);
               })
             }
         }
