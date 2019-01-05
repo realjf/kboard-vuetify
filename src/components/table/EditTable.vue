@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-toolbar flat color="white">
-      <v-toolbar-title>My CRUD</v-toolbar-title>
+      <v-toolbar-title>{{ title }}</v-toolbar-title>
       <v-divider
         class="mx-2"
         inset
@@ -9,7 +9,7 @@
       ></v-divider>
       <v-spacer></v-spacer>
       <v-dialog v-model="dialog" max-width="500px">
-        <v-btn slot="activator" color="primary" dark class="mb-2">New Item</v-btn>
+        <v-btn slot="activator" color="primary" dark class="mb-2">新建</v-btn>
         <v-card>
           <v-card-title>
             <span class="headline">{{ formTitle }}</span>
@@ -39,8 +39,8 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-            <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+            <v-btn color="blue darken-1" flat @click="close">取消</v-btn>
+            <v-btn color="blue darken-1" flat @click="save">保存</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -73,7 +73,7 @@
         </td>
       </template>
       <template slot="no-data">
-        <v-btn color="primary" @click="initialize">Reset</v-btn>
+        <v-btn color="primary" @click="initialize">重置</v-btn>
       </template>
     </v-data-table>
   </div>
@@ -84,6 +84,7 @@
         name: "EditTable",
       data: () => ({
         dialog: false,
+        title: "标题",
         headers: [
           {
             text: 'Dessert (100g serving)',
@@ -117,7 +118,7 @@
 
       computed: {
         formTitle () {
-          return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+          return this.editedIndex === -1 ? '新建' : '编辑'
         }
       },
 
@@ -214,7 +215,7 @@
 
         deleteItem (item) {
           const index = this.desserts.indexOf(item)
-          confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+          confirm('确定删除记录？') && this.desserts.splice(index, 1)
         },
 
         close () {
