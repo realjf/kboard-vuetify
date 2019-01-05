@@ -9,8 +9,9 @@ import 'vuetify/dist/vuetify.min.css'
 import 'vuetify/src/stylus/main.styl'
 import Api from './api'
 import Vuelidate from 'vuelidate';
+import VueResource from 'vue-resource' // 用于读取本地json文件
 
-
+Vue.use(VueResource)
 Vue.use(Vuelidate);
 Vue.use(Vuetify);
 Vue.use(Api);

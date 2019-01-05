@@ -7,16 +7,16 @@
         v-model="drawer"
       >
         <v-list dense>
-          <template v-for="item in items">
+          <template v-for="menu in menus">
             <v-layout
               row
-              v-if="item.heading"
+              v-if="menu.heading"
               align-center
-              :key="item.heading"
+              :key="menu.heading"
             >
               <v-flex xs6>
-                <v-subheader v-if="item.heading">
-                  {{ item.heading }}
+                <v-subheader v-if="menu.heading">
+                  {{ menu.heading }}
                 </v-subheader>
               </v-flex>
               <v-flex xs6 class="text-xs-center">
@@ -24,21 +24,21 @@
               </v-flex>
             </v-layout>
             <v-list-group
-              v-else-if="item.children"
-              v-model="item.model"
-              :key="item.text"
-              :prepend-icon="item.model ? item.icon : item['icon-alt']"
+              v-else-if="menu.children"
+              v-model="menu.model"
+              :key="menu.text"
+              :prepend-icon="menu.model ? menu.icon : menu['icon-alt']"
               append-icon=""
             >
               <v-list-tile slot="activator">
                 <v-list-tile-content>
                   <v-list-tile-title>
-                    {{ item.text }}
+                    {{ menu.text }}
                   </v-list-tile-title>
                 </v-list-tile-content>
               </v-list-tile>
               <v-list-tile
-                v-for="(child, i) in item.children"
+                v-for="(child, i) in menu.children"
                 :key="i"
                 @click=""
                 :to="child.url"
@@ -53,13 +53,13 @@
                 </v-list-tile-content>
               </v-list-tile>
             </v-list-group>
-            <v-list-tile v-else @click="" :key="item.text">
+            <v-list-tile v-else @click="" :key="menu.text">
               <v-list-tile-action>
-                <v-icon>{{ item.icon }}</v-icon>
+                <v-icon>{{ menu.icon }}</v-icon>
               </v-list-tile-action>
               <v-list-tile-content>
                 <v-list-tile-title>
-                  {{ item.text }}
+                  {{ menu.text }}
                 </v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
@@ -91,92 +91,20 @@
         </v-btn>
       </v-toolbar>
       <v-content>
-        <v-container fluid fill-height>
-          <v-layout justify-center align-center>
+        <v-container fluid fill-hight>
+            <BreadCrumb></BreadCrumb>
             <slot name="content"></slot>
-          </v-layout>
         </v-container>
       </v-content>
-      <v-btn
-        fab
-        bottom
-        right
-        color="pink"
-        dark
-        fixed
-        @click.stop="dialog = !dialog"
-      >
-        <v-icon>add</v-icon>
-      </v-btn>
-      <v-dialog v-model="dialog" width="800px">
-        <v-card>
-          <v-card-title
-            class="grey lighten-4 py-4 title"
-          >
-            Create contact
-          </v-card-title>
-          <v-container grid-list-sm class="pa-4">
-            <v-layout row wrap>
-              <v-flex xs12 align-center justify-space-between>
-                <v-layout align-center>
-                  <v-avatar size="40px" class="mr-3">
-                    <img
-                      src="//ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png"
-                      alt=""
-                    >
-                  </v-avatar>
-                  <v-text-field
-                    placeholder="Name"
-                  ></v-text-field>
-                </v-layout>
-              </v-flex>
-              <v-flex xs6>
-                <v-text-field
-                  prepend-icon="business"
-                  placeholder="Company"
-                ></v-text-field>
-              </v-flex>
-              <v-flex xs6>
-                <v-text-field
-                  placeholder="Job title"
-                ></v-text-field>
-              </v-flex>
-              <v-flex xs12>
-                <v-text-field
-                  prepend-icon="mail"
-                  placeholder="Email"
-                ></v-text-field>
-              </v-flex>
-              <v-flex xs12>
-                <v-text-field
-                  type="tel"
-                  prepend-icon="phone"
-                  placeholder="(000) 000 - 0000"
-                  mask="phone"
-                ></v-text-field>
-              </v-flex>
-              <v-flex xs12>
-                <v-text-field
-                  prepend-icon="notes"
-                  placeholder="Notes"
-                ></v-text-field>
-              </v-flex>
-            </v-layout>
-          </v-container>
-          <v-card-actions>
-            <v-btn flat color="primary">More</v-btn>
-            <v-spacer></v-spacer>
-            <v-btn flat color="primary" @click="dialog = false">Cancel</v-btn>
-            <v-btn flat @click="dialog = false">Save</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
     </v-app>
 </template>
 
 <script>
+  import BreadCrumb from "./common/BreadCrumb";
+
   export default {
     name: "Layout",
+    components: {BreadCrumb},
     props: {
       source: String
     },
@@ -184,93 +112,24 @@
       username: "",
       dialog: false,
       drawer: null,
-      items: [
-        {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
-          text: '集群',
-          model: false,
-          children: [
-            {text: '集群', url: "/cluster/index"},
-            {text: '节点', url: "/node/index"},
-            {text: '存储卷', url: "/sc/index"},
-            {text: '命名空间', url: "/namespace/index"},
-            {text: '授权管理', url: "/auth/index"}
-          ]
-        },
-        {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
-          text: '应用',
-          model: false,
-          children: [
-            {text: '无状态', url: "/rc/index"},
-            {text: '有状态', url: "/stateful/index"},
-            {text: '守护进程集', url: "/daemon/index"},
-            {text: '作业', url: "/job/index"},
-            {text: '定时任务', url: "/cronjob/index"},
-            {text: '容器组', url: "/rs/index"},
-            {text: '存储声明', url: "/pvc/index"},
-            {text: '发布', url: "/deployment/index"},
-          ]
-        },
-        {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
-          text: '路由与负载均衡',
-          model: false,
-          children: [
-            {text: '服务', url: "/service/index"},
-            {text: '路由', url: "/ingress/index"},
-          ]
-        },
-        {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
-          text: '应用配置',
-          model: false,
-          children: [
-            {text: '配置项', url: "/configmap/index"},
-            {text: '保密字典', url: "/secret/index"},
-          ]
-        },
-        {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
-          text: '市场',
-          model: false,
-          children: [
-            {text: '镜像', url: "/image/index"},
-            {text: '编排模板', url: "/cluster/index"},
-            {text: '应用目录', url: "/cluster/index"},
-            {text: '服务目录', url: "/cluster/index"},
-          ]
-        },
-        {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
-          text: '团队',
-          model: false,
-          children: [
-            {text: '团队管理', url: "/team/index"},
-          ]
-        },
-        {
-          icon: 'keyboard_arrow_up',
-          'icon-alt': 'keyboard_arrow_down',
-          text: '用户',
-          model: false,
-          children: [
-            {text: '用户管理', url: "/user/index"},
-            {text: '角色管理', url: "/role/index"},
-          ]
-        },
-      ]
+      menus: [],
     }),
       methods: {
-
       },
+    computed: {
+
+    },
     mounted () {
+      // 加载菜单
+      this.$http.get('/static/data/menu.json').then(res => {
+        if(res.body.menus.length > 0){
+          this.menus = res.body.menus;
+        }else{
+          console.log("缺少menus数据");
+        }
+      });
+
+      // 加载用户信息
       let _username = this.username;
       if (!_username){
         let params = {};
