@@ -41,7 +41,7 @@
                 v-for="(child, i) in item.children"
                 :key="i"
                 @click=""
-                to="child.url"
+                :to="child.url"
               >
                 <v-list-tile-action v-if="child.icon">
                   <v-icon>{{ child.icon }}</v-icon>
@@ -191,11 +191,11 @@
           text: '集群',
           model: false,
           children: [
-            {text: '集群'},
-            {text: '节点'},
-            {text: '存储卷'},
-            {text: '命名空间'},
-            {text: '授权管理'}
+            {text: '集群', url: "/cluster/index"},
+            {text: '节点', url: "/node/index"},
+            {text: '存储卷', url: "/sc/index"},
+            {text: '命名空间', url: "/namespace/index"},
+            {text: '授权管理', url: "/auth/index"}
           ]
         },
         {
@@ -204,14 +204,14 @@
           text: '应用',
           model: false,
           children: [
-            {text: '无状态'},
-            {text: '有状态'},
-            {text: '守护进程集'},
-            {text: '作业'},
-            {text: '定时任务'},
-            {text: '容器组'},
-            {text: '存储声明'},
-            {text: '发布'},
+            {text: '无状态', url: "/rc/index"},
+            {text: '有状态', url: "/stateful/index"},
+            {text: '守护进程集', url: "/daemon/index"},
+            {text: '作业', url: "/job/index"},
+            {text: '定时任务', url: "/cronjob/index"},
+            {text: '容器组', url: "/rs/index"},
+            {text: '存储声明', url: "/pvc/index"},
+            {text: '发布', url: "/deployment/index"},
           ]
         },
         {
@@ -220,8 +220,8 @@
           text: '路由与负载均衡',
           model: false,
           children: [
-            {text: '服务'},
-            {text: '路由'},
+            {text: '服务', url: "/service/index"},
+            {text: '路由', url: "/ingress/index"},
           ]
         },
         {
@@ -230,8 +230,8 @@
           text: '应用配置',
           model: false,
           children: [
-            {text: '配置项'},
-            {text: '保密字典'},
+            {text: '配置项', url: "/configmap/index"},
+            {text: '保密字典', url: "/secret/index"},
           ]
         },
         {
@@ -240,10 +240,10 @@
           text: '市场',
           model: false,
           children: [
-            {text: '镜像'},
-            {text: '编排模板'},
-            {text: '应用目录'},
-            {text: '服务目录'},
+            {text: '镜像', url: "/image/index"},
+            {text: '编排模板', url: "/cluster/index"},
+            {text: '应用目录', url: "/cluster/index"},
+            {text: '服务目录', url: "/cluster/index"},
           ]
         },
         {
@@ -252,7 +252,7 @@
           text: '团队',
           model: false,
           children: [
-            {text: '团队管理'},
+            {text: '团队管理', url: "/team/index"},
           ]
         },
         {
@@ -261,16 +261,14 @@
           text: '用户',
           model: false,
           children: [
-            {text: '用户管理'},
-            {text: '角色管理'},
+            {text: '用户管理', url: "/user/index"},
+            {text: '角色管理', url: "/role/index"},
           ]
         },
       ]
     }),
       methods: {
-          checkLogin: function () {
 
-          }
       },
     mounted () {
       let _username = this.username;
