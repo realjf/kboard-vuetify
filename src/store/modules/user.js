@@ -17,14 +17,14 @@ const actions = {
 
 // mutations
 const mutations = {
-  setUserInfo (state, payload) {
+  UPDATE_USER_INFO (state, payload) {
     state.userInfo.username = payload.username;
     state.userInfo.email = payload.email;
   },
 }
 
 export default {
-    namespaced: true,
+    namespaced: true, // 调用
     state,
     getters,
     actions,

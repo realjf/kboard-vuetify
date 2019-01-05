@@ -16,10 +16,10 @@
                   <v-form ref="form"
                           v-model="valid"
                           lazy-validation>
-                    <v-text-field prepend-icon="person" name="email" label="邮箱" type="text" v-model="email" required
-                                  :rules="emailRules"></v-text-field>
-                    <v-text-field prepend-icon="lock" name="password" label="密码" id="password" type="password" v-model="password" required
-                                  :rules="passwordRules"></v-text-field>
+                    <v-text-field prepend-icon="person" name="email" label="邮箱" type="text" @input="handleEmail" required
+                                  :rules="emailRules" value=""></v-text-field>
+                    <v-text-field prepend-icon="lock" name="password" label="密码" id="password" type="password" @input="handlePassword" required
+                                  :rules="passwordRules" value=""></v-text-field>
                   </v-form>
                 </v-card-text>
                 <v-card-actions>
@@ -68,15 +68,21 @@
               this.snackbar = false
             }
           },
+          handleEmail: function(val){
+            this.email = val;
+          },
+          handlePassword: function(val){
+            this.password = val;
+          },
             login: function () {
               this.$api.api_login.login({
                 'email': this.email,
                 "password": this.password,
               }).then(resp => {
-                  console.log(resp);
                   if(resp.code == 100){
-                    let payload = {username: resp.result.name, email: resp.result.email};
-                    this.$store.commit('setUserInfo', payload);
+                    let payload = {username: resp.result.username, email: resp.result.email};
+                    console.log(this.$store);
+                    this.$store.commit('user/UPDATE_USER_INFO', payload);
                     this.$router.push("/home")
                   }else{
                     Alert.methods.errorAlert(resp.message);

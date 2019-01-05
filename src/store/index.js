@@ -9,20 +9,10 @@ Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
 
-// 全局
-const state = {}
-const getters = {}
-const mutataions = {}
-const actions = {}
-
 export default new Vuex.Store({
     modules: {
-      user
+      user: user,
     },
-    state,
-    getters,
-    mutataions,
-    actions,
     // 严格模式，非法修改state时报错
     strict: debug,
     plugins: debug ? [createLogger()] : []

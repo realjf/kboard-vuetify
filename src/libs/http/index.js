@@ -14,8 +14,7 @@ export default function $axios(options) {
             headers: {},
             transformResponse: [function (data) {
             }],
-            transformRequest: data => Qs.stringify(data) // 将application/json转换为application/x-www-form-urlencoded
-        })
+            })
 
         // request 拦截器
         instance.interceptors.request.use(
@@ -70,6 +69,7 @@ export default function $axios(options) {
         // response 拦截器
         instance.interceptors.response.use(
             response => {
+              console.log(response);
                 let data;
                 // IE9时response.data是undefined，因此需要使用response.request.responseText(Stringify后的字符串)
                 if (response.data == undefined) {

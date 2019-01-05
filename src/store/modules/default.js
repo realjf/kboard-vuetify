@@ -16,7 +16,7 @@ const mutations = {
 }
 
 export default {
-  namespaced: true,
+  namespaced: true, // 调用使用命名空间 default/xxxx
   state,
   getters,
   actions,
