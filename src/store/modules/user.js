@@ -1,6 +1,10 @@
 // initial state
 const state = {
-    all: []
+    userInfo: {
+      username: "",
+      email: "",
+    },
+    login: false,
 }
 
 // getters
@@ -13,6 +17,10 @@ const actions = {
 
 // mutations
 const mutations = {
+  setUserInfo (state, payload) {
+    state.userInfo.username = payload.username;
+    state.userInfo.email = payload.email;
+  },
 }
 
 export default {

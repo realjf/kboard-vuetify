@@ -1,6 +1,6 @@
 import axios from 'axios';
 import config from './config';
-import qs from 'qs';
+import Qs from 'qs';
 import Cookies from "js-cookie";
 import router from '@/router'
 
@@ -14,7 +14,7 @@ export default function $axios(options) {
             headers: {},
             transformResponse: [function (data) {
             }],
-            transformRequest: data => qs.stringify(data) // 将application/json转换为application/x-www-form-urlencoded
+            transformRequest: data => Qs.stringify(data) // 将application/json转换为application/x-www-form-urlencoded
         })
 
         // request 拦截器
@@ -39,7 +39,7 @@ export default function $axios(options) {
                         || config.url.endsWith('patchs')
                     ) {
                     } else {
-                        config.data = qs.stringify(config.data)
+                        config.data = Qs.stringify(config.data)
                     }
                 }
                 return config
@@ -79,22 +79,22 @@ export default function $axios(options) {
                 }
 
                 // 根据返回的code值来做不同的处理
-                switch (data.rc) {
-                    case 1:
-                        console.log(data.desc)
-                        break;
-                    case 0:
-                        store.commit('changeState')
-                    // console.log('登录成功')
-                    default:
-                }
+                // switch (data.rc) {
+                //     case 1:
+                //         console.log(data.desc)
+                //         break;
+                //     case 0:
+                //         store.commit('changeState')
+                //     // console.log('登录成功')
+                //     default:
+                // }
                 // 若不是正确的返回code，且已经登录，就抛出错误
                 // const err = new Error(data.desc)
                 // err.data = data
                 // err.response = response
                 // throw err
 
-
+                console.log(data);
                 return data
             },
             err => {

@@ -8,7 +8,10 @@ import store from './store'
 import 'vuetify/dist/vuetify.min.css'
 import 'vuetify/src/stylus/main.styl'
 import Api from './api'
+import Vuelidate from 'vuelidate';
 
+
+Vue.use(Vuelidate);
 Vue.use(Vuetify);
 Vue.use(Api);
 
