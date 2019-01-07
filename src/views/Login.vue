@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
     <v-app id="inspire">
       <v-content>
+        <v-card><Snackbar></Snackbar></v-card>
         <v-container fluid fill-height>
           <v-layout align-center justify-center>
             <v-flex xs12 sm8 md4>
@@ -32,18 +32,20 @@
         </v-container>
       </v-content>
     </v-app>
-  </div>
 </template>
 
 <script>
 
+    import Snackbar from "../components/common/Snackbar";
     export default {
         name: "Login",
-        data: () => ({
+      components: {Snackbar},
+      data: () => ({
           drawer: null,
           email: "",
           password: "",
           valid: true,
+          snackbar: false,
           emailRules: [
             v => !!v || 'E-mail is required',
             v => /.+@.+/.test(v) || 'E-mail must be valid'
@@ -62,10 +64,10 @@
         methods: {
           validate: function() {
             if (this.$refs.form.validate()) {
-              this.snackbar = true
+              this.snackbar = false
               this.login();
             }else{
-              this.snackbar = false
+              this.snackbar = true
             }
           },
           handleEmail: function(val){
@@ -85,11 +87,11 @@
                     // 设置cookie
                     window.location.href = "/home";
                   }else{
-
+                    this.snackbar = true;
                   }
               }).catch(error => {
-                let err = JSON.stringify(error);
-                console.log(err);
+                this.snackbar = true;
+                console.log(1);
               })
             }
         }

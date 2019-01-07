@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-snackbar
-      v-model="snackbar"
+      v-model="snackbarVal"
       :bottom="y === 'bottom'"
       :left="x === 'left'"
       :multi-line="mode === 'multi-line'"
@@ -11,13 +11,6 @@
       :vertical="mode === 'vertical'"
     >
       {{ text }}
-      <v-btn
-        color="pink"
-        flat
-        @click="snackbar = false"
-      >
-        Close
-      </v-btn>
     </v-snackbar>
   </v-card>
 </template>
@@ -25,13 +18,32 @@
 <script>
     export default {
         name: "Snackbar",
+      props: {
+        snackbar: {
+          type: Boolean,
+          default: function () {
+            return false;
+          }
+        },
+        color: {
+          type: String,
+          default: function () {
+            return "success" // error|success|info
+          }
+        }
+      },
+      watch: {
+        snackbar: function(val){
+              this.snackbarVal = val;
+            }
+      },
       data () {
         return {
-          snackbar: false,
+          snackbarVal: false,
           y: 'top',
           x: null,
           mode: '',
-          timeout: 6000,
+          timeout: 3000,
           text: 'Hello, I\'m a snackbar'
         }
       }
