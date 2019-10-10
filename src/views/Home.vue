@@ -1,11 +1,11 @@
 <template>
   <Layout>
-    <EditTable slot="content"></EditTable>
+    <!-- <EditTable slot="content"></EditTable> -->
   </Layout>
 </template>
 
 <script>
-    import Layout from "../components/Layout";
+    import Layout from "../components/Layout2";
     import EditTable from "../components/table/EditTable";
     export default {
         name: "Home",

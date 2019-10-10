@@ -3,10 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import Vuetify from 'vuetify'
 import store from './store'
+import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
-import 'vuetify/src/stylus/main.styl'
+import 'font-awesome/css/font-awesome.min.css';
 import Api from './api'
 import Vuelidate from 'vuelidate';
 import VueResource from 'vue-resource' // 用于读取本地json文件
@@ -33,6 +33,11 @@ new Vue({
   el: '#app',
   router,
   store: store,
+  vuetify: new Vuetify({
+    icons: {
+      iconfont: 'mdi', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4'
+    },
+  }), // 初始化vuetify
   components: { App },
   template: '<App/>'
 })
