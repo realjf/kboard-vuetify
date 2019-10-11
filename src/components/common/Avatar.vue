@@ -1,6 +1,6 @@
 <template>
     <v-row justify="end">
-        <v-avatar>
+        <v-avatar size="32">
             <img src="https://realjf.io/avatar.jpg" alt="realjf" />
         </v-avatar>
     </v-row>
@@ -17,5 +17,7 @@ export default {
 </script>
 
 <style scoped>
-
+.v-avatar {
+    margin: auto 15px;
+}
 </style>
