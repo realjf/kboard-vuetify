@@ -1,15 +1,13 @@
 <template>
   <v-app>
-    <k-nav-drawer app></k-nav-drawer>
-    <v-app-bar app>
-        <k-avatar></k-avatar>
+    <v-app-bar app class="blue">
+      <k-avatar></k-avatar>
     </v-app-bar>
-    <v-content app>
-      <v-container fluid fill-hight>
-        <k-breadcrumb></k-breadcrumb>
-      </v-container>
+    <v-content app class="k-content">
+      <k-breadcrumb class="k-breadcrumb"></k-breadcrumb>
+      <v-container fluid></v-container>
     </v-content>
-
+    <k-nav-drawer class="nav-bar"></k-nav-drawer>
     <k-footer app></k-footer>
   </v-app>
 </template>
@@ -26,7 +24,7 @@ export default {
     "k-nav-drawer": NavDrawer,
     "k-footer": Footer,
     "k-breadcrumb": BreadCrumb,
-    "k-avatar": Avatar,
+    "k-avatar": Avatar
   },
   data() {
     return {};
@@ -35,4 +33,13 @@ export default {
 </script>
 
 <style scoped>
+.nav-bar {
+  position: fixed;
+  margin-top: 64px;
+  width: auto;
+  height: 100%;
+}
+.k-content {
+  margin-left: 65px;
+}
 </style>
