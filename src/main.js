@@ -35,7 +35,7 @@ new Vue({
   store: store,
   vuetify: new Vuetify({
     icons: {
-      iconfont: 'mdi', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4'
+      iconfont: 'fa4', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4'
     },
   }), // 初始化vuetify
   components: { App },
